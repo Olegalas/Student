@@ -7,7 +7,7 @@ object Main extends App {
 
     while(true){
       view.startMenu()
-      val command = view.getCommand();
+      val command = view.doCommand()
       view.process(command)
     }
 

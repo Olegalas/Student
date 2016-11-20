@@ -1,5 +1,7 @@
 package main.scala.utils
 
+import main.scala.model.{Choose, Default, No, Yes}
+
 import scala.io.Source
 import scala.util.Try
 import scala.util.Success
@@ -19,6 +21,22 @@ object Utils {
        case Success(n) => n
        case Failure(e) => inputInt(s)
     }    
+  }
+
+  def inputYesNo(s: String): Choose = {
+    print(s)
+    Try(reader.readLine() toInt) match {
+      case Success(n) => getChoose(n)
+      case Failure(e) => inputYesNo(s)
+    }
+  }
+
+  private def getChoose(num: Int): Choose ={
+    num match {
+      case 1 => Yes()
+      case 2 => No()
+      case _ => Default()
+    }
   }
   
   def inputDouble(s: String): Double = {
