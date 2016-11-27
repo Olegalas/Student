@@ -1,6 +1,6 @@
-package main.scala.utils
+package utils
 
-import main.scala.model.{Choose, Default, No, Yes}
+import model.{Choose, Default, No, Yes}
 
 import scala.io.Source
 import scala.util.Try

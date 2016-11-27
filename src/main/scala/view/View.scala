@@ -1,11 +1,10 @@
-package main.scala.view
+package view
 
-import main.scala.model._
-import scala.util.Success
-import scala.util.Try
-import scala.util.Failure
-import main.scala.utils.Utils
-import main.scala.controller.StudentController
+import controller.StudentController
+import model._
+import utils.Utils
+
+import scala.util.{Failure, Success, Try}
 
 class View() {
   

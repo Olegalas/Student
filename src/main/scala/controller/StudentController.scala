@@ -1,41 +1,27 @@
-package main.scala.controller
+package controller
 
-import java.io._
-import java.util.stream.Collectors
+import model.Student
+import serialize.StudentSerializer
 
-import main.scala.model.Student
-import main.scala.serialize.JsonSerializer
-
-import scala.collection.mutable
-import scala.collection.mutable.{ArrayBuffer, ArrayBuilder}
+import scala.collection.mutable.ArrayBuffer
 
 class StudentController {
 
-  private val fileName = "data.json"
   private var students: Seq[Student] = init()
 
 
   private def init() : ArrayBuffer[Student] = {
-    val source = scala.io.Source.fromFile(fileName)
-    val json = try source.mkString finally source.close()
-
-    val o: Option[Array[Student]] = JsonSerializer.toObject(json, new Array[Student](1).getClass)
-    var newStudents = new ArrayBuffer[Student]
-    o.getOrElse(new Array[Student](0)).foreach(s => newStudents = newStudents :+ s)
-    newStudents
+    StudentSerializer.downloadStudents()
   }
 
-  def createStudent(name: String, age: Int, averageMark: Double):Unit = {
+  def createStudent(name: String, age: Int, averageMark: Double){
     students = students :+ Student(name, age, averageMark)
-
-    val writer = new FileWriter(fileName)
-    writer.write(JsonSerializer.toJason(students.toArray))
-    writer.close()
-
+    StudentSerializer.saveStudents(students)
   }
   
   def deleteStudent(name: String):Unit = {
     students = students.filterNot ( x => x.name == name )
+    StudentSerializer.saveStudents(students)
   }
   
   // do not throw native reference on students because field doesn't immutable
@@ -48,6 +34,7 @@ class StudentController {
   def editStudent(i: Student, newName: String, newAge: Int, newAverageMark: Double) = {
     val newStudent = Student(newName, newAge, newAverageMark)
     students = students.filterNot ( x => x.name == i.name) :+ newStudent
+    StudentSerializer.saveStudents(students)
   }
 
   
