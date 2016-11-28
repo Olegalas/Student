@@ -11,4 +11,4 @@ libraryDependencies ++= Seq(
 
 logLevel := Level.Debug
 
-mainClass in (Compile,run) := Some("main.scala.view.Main")
+

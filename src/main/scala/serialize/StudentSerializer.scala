@@ -33,7 +33,6 @@ object StudentSerializer {
 
 
   def saveStudents(students: Seq[Student]) {
-    // TODO do not create FileWriter every time you need
     val writer = new FileWriter(fileName)
     writer.write(JsonSerializer.toJason(students.toArray))
     writer.close()
