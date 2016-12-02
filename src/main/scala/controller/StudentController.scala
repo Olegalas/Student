@@ -15,11 +15,13 @@ class StudentController {
   }
 
   def createStudent(name: String, age: Int, averageMark: Double){
-    students = students :+ Student(name, age, averageMark)
+    // scala cast example
+    students match { case a: ArrayBuffer[Student] => a += Student(name, age, averageMark) }
     StudentSerializer.saveStudents(students)
   }
   
   def deleteStudent(name: String):Unit = {
+    // another example of work with scala collections
     students = students.filterNot ( x => x.name == name )
     StudentSerializer.saveStudents(students)
   }

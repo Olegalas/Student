@@ -24,10 +24,10 @@ object StudentSerializer {
   }
 
   def parseJson(json: String): ArrayBuffer[Student] = {
-    // TODO mutable ArrayBuffer
-    val o = JsonSerializer.toObject(json, new Array[Student](1).getClass)
+    // example creating ArrayBuffer from Array
     var newStudents = new ArrayBuffer[Student]
-    o.getOrElse(new Array[Student](0)).foreach(s => newStudents = newStudents :+ s)
+    val o = JsonSerializer.toObject(json, new Array[Student](1).getClass)
+    o.getOrElse(new Array[Student](0)).foreach(s => newStudents += s)
     newStudents
   }
 
