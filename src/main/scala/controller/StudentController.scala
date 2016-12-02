@@ -10,7 +10,7 @@ class StudentController {
   private var students: Seq[Student] = init()
 
 
-  private def init() : ArrayBuffer[Student] = {
+  private def init() : Seq[Student] = {
     StudentSerializer.downloadStudents()
   }
 

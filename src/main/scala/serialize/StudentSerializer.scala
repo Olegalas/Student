@@ -13,7 +13,7 @@ object StudentSerializer {
 
   private val fileName = "data.json"
 
-  def downloadStudents():ArrayBuffer[Student] = {
+  def downloadStudents():Seq[Student] = {
     try {
         val source =  scala.io.Source.fromFile(fileName)
         val json = try source.mkString finally source.close()
@@ -23,14 +23,9 @@ object StudentSerializer {
     }
   }
 
-  def parseJson(json: String): ArrayBuffer[Student] = {
-    // example creating ArrayBuffer from Array
-    var newStudents = new ArrayBuffer[Student]
-    val o = JsonSerializer.toObject(json, new Array[Student](1).getClass)
-    o.getOrElse(new Array[Student](0)).foreach(s => newStudents += s)
-    newStudents
+  def parseJson(json: String): Seq[Student] = {
+    JsonSerializer.getStudents(json)
   }
-
 
   def saveStudents(students: Seq[Student]) {
     val writer = new FileWriter(fileName)

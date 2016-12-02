@@ -1,6 +1,8 @@
 package serialize
 
 import com.google.gson.Gson
+import model.Student
+import scala.collection.mutable.ArrayBuffer
 
 object JsonSerializer {
 
@@ -8,8 +10,10 @@ object JsonSerializer {
   
   def toJason(o: AnyRef) : String = gson.toJson(o)
   
-  def toObject[T](json: String, typeClass: Class[T]): Option[T] = {
-    Option.apply(gson.fromJson(json, typeClass))
+  def getStudents(json: String): Seq[Student] = {
+    // Type of array Students
+    val typeClass = new Array[Student](1).getClass
+    gson.fromJson(json, typeClass).toSeq
   }
 
 
