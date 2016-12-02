@@ -1,2 +1,3 @@
-"# Student" 
-"Simple little scala project for study basic notions.."
+## Student
+
+Simple little scala project for study basic notions..
